@@ -1,0 +1,431 @@
+{
+  "version": 1,
+  "description": "Initial golden dataset - 60 cases. Difficulty reflects classification difficulty rather than email length: easy cases have explicit intent and little ambiguity; medium cases require some interpretation or contain mild competing signals; hard cases include sarcasm, irony, typos, indirect intent, misleading wording, mixed signals, or multiple plausible categories where the primary intent must be inferred.",
+  "cases": [
+    {
+      "id": "billing_001",
+      "email_text": "Hi, I was charged €29.99 for my subscription today. I thought my plan was €19.99 per month. Can you please check what happened?",
+      "category": "Billing",
+      "reference_summary": "Customer was charged €29.99 instead of the expected €19.99 subscription price and wants the charge investigated.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "billing_002",
+      "email_text": "I cancelled my subscription last week but I've still been charged for this month's plan. Could you refund the payment please?",
+      "category": "Billing",
+      "reference_summary": "Customer was charged after cancelling their subscription and is requesting a refund.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "billing_003",
+      "email_text": "Can someone explain why there are two charges on my card for the same order? Both are showing as completed, not pending.",
+      "category": "Billing",
+      "reference_summary": "Customer sees two completed charges for the same order and wants an explanation.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "billing_004",
+      "email_text": "I need a copy of the invoice for my last payment. I can't seem to find it anywhere in my account.",
+      "category": "Billing",
+      "reference_summary": "Customer wants a copy of their most recent payment invoice.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "billing_005",
+      "email_text": "The amount taken from my account is higher than what was shown at checkout. The order was €74.50 but €82.95 was taken. There was no mention of an extra charge before I paid.",
+      "category": "Billing",
+      "reference_summary": "Customer was charged €82.95 instead of the €74.50 checkout amount and is questioning the unexpected additional charge.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "billing_006",
+      "email_text": "I upgraded yesterday and was charged for the full new plan, but I had already paid for the old plan three days ago. I assume there should be some kind of credit for the unused part of the old subscription. Can you check?",
+      "category": "Billing",
+      "reference_summary": "Customer upgraded shortly after paying for the previous plan and believes they should receive a credit for the unused portion.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "billing_007",
+      "email_text": "My card was declined when I first tried to pay, so I used another card and the payment went through. Now I'm seeing a charge on both cards. One of them still says pending, but I don't want to end up paying twice.",
+      "category": "Billing",
+      "reference_summary": "Customer attempted payment with two cards after an initial decline and is concerned about a duplicate charge, with one payment currently pending.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "billing_008",
+      "email_text": "The invoice has my company name wrong and the billing address is also from my old address. I need the invoice corrected for accounting. The payment itself is fine.",
+      "category": "Billing",
+      "reference_summary": "Customer needs their invoice updated with the correct company name and billing address; the payment is not disputed.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "billing_009",
+      "email_text": "Wow, great job charging me twice 👍 One payment is for the order I actually made, and apparently the second one is for the privilege of making the same order twice. Can you reverse the extra charge?",
+      "category": "Billing",
+      "reference_summary": "Customer sarcastically complains about being charged twice for the same order and wants the duplicate charge refunded.",
+      "difficulty": "hard"
+    },
+    {
+      "id": "billing_010",
+      "email_text": "I was told by support in a previous email that the refund had already been processed. It's been 12 business days and nothing has reached my account. The original charge was made through Apple Pay, so I'm not sure if that changes anything. Could you confirm when and how the refund was issued?",
+      "category": "Billing",
+      "reference_summary": "Customer was told a refund was processed 12 business days ago but has not received it and wants confirmation of the refund status and payment method.",
+      "difficulty": "hard"
+    },
+
+    {
+      "id": "technical_001",
+      "email_text": "The app keeps crashing whenever I try to open it. I've restarted my phone but it's still happening.",
+      "category": "Technical Issue",
+      "reference_summary": "The app repeatedly crashes on launch even after the customer restarted their phone.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "technical_002",
+      "email_text": "Videos aren't loading for me. My internet is working fine and everything else loads normally.",
+      "category": "Technical Issue",
+      "reference_summary": "Videos fail to load even though the customer's internet connection appears to be working normally.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "technical_003",
+      "email_text": "The website is showing a blank page after I log in. I've tried refreshing it a few times.",
+      "category": "Technical Issue",
+      "reference_summary": "Customer sees a blank page after logging in despite refreshing the website.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "technical_004",
+      "email_text": "My notifications have stopped coming through since yesterday. I checked that notifications are enabled on my phone.",
+      "category": "Technical Issue",
+      "reference_summary": "Customer stopped receiving notifications despite notifications being enabled on their phone.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "technical_005",
+      "email_text": "Every time I upload a PDF, it gets stuck at 99% and never finishes. I've tried three different files and the same thing happens each time. Is there a problem with uploads at the moment?",
+      "category": "Technical Issue",
+      "reference_summary": "PDF uploads consistently become stuck at 99% across multiple files, suggesting an upload system issue.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "technical_006",
+      "email_text": "The dashboard was working this morning but now none of the charts are displaying. The rest of the page loads normally and I can still click around, but the graph areas are just empty.",
+      "category": "Technical Issue",
+      "reference_summary": "Dashboard charts stopped displaying while the rest of the page remains functional.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "technical_007",
+      "email_text": "I can upload an image successfully, but when I try to download the processed version I get an error saying the file doesn't exist. I've tried logging out and back in and it hasn't helped.",
+      "category": "Technical Issue",
+      "reference_summary": "Processed image downloads fail with a file-not-found error even after the customer logged back in.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "technical_008",
+      "email_text": "The search function is acting strange. If I search for a word that I know is in one of my documents, nothing comes up, but if I search for a different word from the same document it works. This started after the latest update.",
+      "category": "Technical Issue",
+      "reference_summary": "Search inconsistently fails to find known terms in documents, and the issue began after the latest update.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "technical_009",
+      "email_text": "app keeps frezzing wen i switch between projects. restarted it, cleared cache, still does it. browser is fine tho. started after the update yday. is this a bug or am i missing somthing?",
+      "category": "Technical Issue",
+      "reference_summary": "Customer reports that the app freezes when switching between projects after a recent update, while the browser version works normally.",
+      "difficulty": "hard"
+    },
+    {
+      "id": "technical_010",
+      "email_text": "I'm getting a very odd issue with exports. The first export works, but if I make a small change and export again, the downloaded file is actually the previous version. If I wait around 10 minutes and try again it sometimes updates. I've checked the timestamps and confirmed I'm not opening an old file by mistake. This is happening across two different computers.",
+      "category": "Technical Issue",
+      "reference_summary": "Exports sometimes return an outdated version after changes, with the issue occurring across two computers and occasionally resolving after waiting.",
+      "difficulty": "hard"
+    },
+
+    {
+      "id": "account_001",
+      "email_text": "I forgot my password and need help resetting it.",
+      "category": "Account/Access",
+      "reference_summary": "Customer forgot their password and needs assistance resetting it.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "account_002",
+      "email_text": "How do I change the email address linked to my account?",
+      "category": "Account/Access",
+      "reference_summary": "Customer wants to change the email address associated with their account.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "account_003",
+      "email_text": "I can't log in because I no longer have access to the phone number I used when I signed up.",
+      "category": "Account/Access",
+      "reference_summary": "Customer cannot log in because they no longer have access to their registered phone number.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "account_004",
+      "email_text": "My account is showing as locked. I think I entered the wrong password too many times. Can you unlock it?",
+      "category": "Account/Access",
+      "reference_summary": "Customer's account is locked after multiple incorrect password attempts and they want it unlocked.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "account_005",
+      "email_text": "I changed my email address, but the verification email is being sent to my old address, which I can't access anymore. How am I supposed to verify the new one?",
+      "category": "Account/Access",
+      "reference_summary": "Customer cannot verify their new email because verification messages are still being sent to their inaccessible old email address.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "account_006",
+      "email_text": "I have two accounts and accidentally signed up with the wrong email for my subscription. Is there a way to move the subscription to my other account without cancelling everything?",
+      "category": "Account/Access",
+      "reference_summary": "Customer accidentally subscribed using the wrong account and wants to transfer the subscription to another account.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "account_007",
+      "email_text": "I can log in on my phone but not on my laptop. It keeps saying my password is incorrect even though I'm using the same password that works on the phone. I also tried resetting it, but the new password doesn't work on the laptop either.",
+      "category": "Account/Access",
+      "reference_summary": "Customer can access the account on their phone but cannot log in from their laptop despite resetting the password.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "account_008",
+      "email_text": "Someone on our team left the company and their account is still listed as the owner of our workspace. I have admin access, but I don't see an option to transfer ownership. We need to do this before we can remove their account.",
+      "category": "Account/Access",
+      "reference_summary": "Customer needs to transfer workspace ownership from a former employee but cannot find the ownership transfer option despite having admin access.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "account_009",
+      "email_text": "I can sign in normally, so I don't think the password is the problem. The issue is that once I'm in, I can't get past the verification screen because the code goes to a number I haven't had for years. Changing the password obviously didn't help. I just need to get back into the account.",
+      "category": "Account/Access",
+      "reference_summary": "Customer can authenticate with their password but is blocked by verification being sent to an old phone number and needs account access restored.",
+      "difficulty": "hard"
+    },
+    {
+      "id": "account_010",
+      "email_text": "The new dashboard layout is a bit annoying, but that's not actually why I'm contacting you. The bigger problem is that I suddenly can't access our team's admin settings. I was able to manage permissions yesterday, and now those options have disappeared from my account. Another admin can still use them, so it doesn't look like the whole workspace is affected. Can you check why my admin access has changed?",
+      "category": "Account/Access",
+      "reference_summary": "Customer mentions dissatisfaction with the new dashboard but the primary intent is to resolve the unexpected loss of admin access to their team workspace.",
+      "difficulty": "hard"
+    },
+
+    {
+      "id": "complaint_001",
+      "email_text": "I'm really disappointed with the service. My order was supposed to arrive yesterday and it still hasn't shown up.",
+      "category": "Complaint",
+      "reference_summary": "Customer is unhappy because their order was expected yesterday but has not arrived.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "complaint_002",
+      "email_text": "I've contacted support twice about this already and haven't received a proper answer. This is getting very frustrating.",
+      "category": "Complaint",
+      "reference_summary": "Customer is frustrated after contacting support twice without receiving a satisfactory response.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "complaint_003",
+      "email_text": "The item I received was damaged when it arrived. The box was also badly crushed. I'm not happy with how this was handled.",
+      "category": "Complaint",
+      "reference_summary": "Customer received a damaged item in a visibly damaged package and is unhappy with the service.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "complaint_004",
+      "email_text": "I was told someone would call me back yesterday, but nobody did. I shouldn't have to keep chasing this.",
+      "category": "Complaint",
+      "reference_summary": "Customer complains that a promised callback did not happen and they are tired of following up.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "complaint_005",
+      "email_text": "I've been waiting over a week for a response to a pretty simple question. Every time I contact support I'm told it's been escalated, but then I hear nothing. At this point I don't know whether anyone is actually looking at it.",
+      "category": "Complaint",
+      "reference_summary": "Customer has waited over a week for an answer despite repeated escalations and is frustrated by the lack of follow-up.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "complaint_006",
+      "email_text": "The delivery driver left my package outside in the rain even though I was home. The box was soaked through and one of the items inside is damaged. I understand that mistakes happen, but this is not acceptable.",
+      "category": "Complaint",
+      "reference_summary": "Customer complains that a delivery was left outside in the rain despite being home, resulting in a damaged item.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "complaint_007",
+      "email_text": "I've had three different people respond to this issue and I've had to explain the entire situation from the beginning every single time. Surely there is some record of the previous conversations. This is taking far longer than it should.",
+      "category": "Complaint",
+      "reference_summary": "Customer is frustrated about repeatedly explaining the same issue to different support agents and feels the resolution is taking too long.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "complaint_008",
+      "email_text": "Your website says orders are usually delivered within 2-3 days. Mine took 9 days, and when it finally arrived, part of the order was missing. I've already spent more time emailing support than I spent placing the order.",
+      "category": "Complaint",
+      "reference_summary": "Customer complains about a nine-day delivery delay and a missing item, and is frustrated by the amount of time spent contacting support.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "complaint_009",
+      "email_text": "Lovely experience. Order arrived late, the wrong item was inside, and now I'm being told I need to wait another 5 days for a replacement. Really impressed.",
+      "category": "Complaint",
+      "reference_summary": "Customer sarcastically expresses dissatisfaction about a late delivery, receiving the wrong item, and having to wait for a replacement.",
+      "difficulty": "hard"
+    },
+    {
+      "id": "complaint_010",
+      "email_text": "Apparently following the instructions from your support team wasn't the best idea. I did exactly what I was told in the previous email, and now the issue is worse. I then had another agent tell me that I shouldn't have done any of those steps in the first place. I'm sure there was a perfectly good reason for all of this, but at this point I'd really just like someone to acknowledge that this was handled badly and sort it out.",
+      "category": "Complaint",
+      "reference_summary": "Customer indirectly expresses dissatisfaction with contradictory support instructions that worsened the issue and wants the company to acknowledge the poor handling and resolve it.",
+      "difficulty": "hard"
+    },
+
+    {
+      "id": "feature_001",
+      "email_text": "It would be really useful if you could add dark mode to the app. I use it at night and the bright screen is a bit much.",
+      "category": "Feature Request",
+      "reference_summary": "Customer requests a dark mode option for the app.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "feature_002",
+      "email_text": "Could you add the option to export reports as Excel files? PDF is useful, but I need to work with the data afterwards and Excel would make that much easier.",
+      "category": "Feature Request",
+      "reference_summary": "Customer requests the ability to export reports in Excel format for further data analysis.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "feature_003",
+      "email_text": "Is there any chance you could add scheduled emails? We generate the same report every Monday and currently someone has to log in and send it manually. Even a basic option where I choose the report, recipients and time would save us a lot of work.",
+      "category": "Feature Request",
+      "reference_summary": "Customer requests scheduled report emails with configurable reports, recipients, and sending times.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "feature_004",
+      "email_text": "I'd like to request better filtering for the search results. At the moment we can search by keyword, but it would be much more useful if we could filter by date, project, and who created the item. We have hundreds of records now and finding older ones is becoming difficult.",
+      "category": "Feature Request",
+      "reference_summary": "Customer requests additional search filters for date, project, and creator to make it easier to find records.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "feature_005",
+      "email_text": "Every Monday someone on our team spends about 20 minutes sending the same report to the same people. We already have the report saved, so it feels a bit silly that someone still has to log in and press send every week.",
+      "category": "Feature Request",
+      "reference_summary": "Customer indirectly requests a scheduled or automated report-email feature to avoid manually sending the same report every week.",
+      "difficulty": "hard"
+    },
+
+    {
+      "id": "other_001",
+      "email_text": "Hi, what are your customer support opening hours? I need to speak to someone about an issue.",
+      "category": "Other",
+      "reference_summary": "Customer is asking about customer support opening hours.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "other_002",
+      "email_text": "Where can I find your terms and conditions?",
+      "category": "Other",
+      "reference_summary": "Customer wants to find the company's terms and conditions.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "other_003",
+      "email_text": "Do you offer your service in Canada?",
+      "category": "Other",
+      "reference_summary": "Customer is asking whether the service is available in Canada.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "other_004",
+      "email_text": "Is there a limit to how many people I can have on one team?",
+      "category": "Other",
+      "reference_summary": "Customer is asking about the maximum number of team members allowed.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "other_005",
+      "email_text": "I saw that you have different plans but I'm not sure which one would be suitable for a small business with five employees. We mainly need shared projects and basic reporting. Could you point me in the right direction?",
+      "category": "Other",
+      "reference_summary": "Customer wants guidance choosing an appropriate plan for a five-person small business needing shared projects and basic reporting.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "other_006",
+      "email_text": "Can you tell me if you provide any discounts for students? I'm currently studying and looking at using the service for a university project.",
+      "category": "Other",
+      "reference_summary": "Customer is asking whether student discounts are available for university use.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "other_007",
+      "email_text": "I received an email saying my account is eligible for a business plan, but I'm not really sure what that means. We're currently using the standard plan with eight people. What would actually be different if we moved to business?",
+      "category": "Other",
+      "reference_summary": "Customer wants clarification about the differences between their current standard plan and the business plan.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "other_008",
+      "email_text": "We're considering using your service for a new project with around 30 employees. Before we move forward, I need to know whether you have any minimum contract period or if we can cancel whenever we need to. I couldn't find a clear answer on the website.",
+      "category": "Other",
+      "reference_summary": "Customer is evaluating the service for around 30 employees and wants information about contract duration and cancellation terms.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "other_009",
+      "email_text": "I need to send some information to a colleague who doesn't have an account. Can people outside our organisation view a shared project, or does everyone who accesses it need to have their own account?",
+      "category": "Other",
+      "reference_summary": "Customer is asking whether people without accounts can view shared projects or whether an account is required.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "other_010",
+      "email_text": "Do you have any documentation explaining how your service handles data stored on your platform? Our IT team needs to review things like where the data is hosted, how long it's retained, and whether we can request deletion before we approve it for company use.",
+      "category": "Other",
+      "reference_summary": "Customer is requesting information about data hosting, retention, and deletion policies for an internal IT review.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "other_011",
+      "email_text": "I'm looking at using your service for a volunteer organisation rather than a normal business. We don't have a large budget, and we're trying to work out whether there's a non-profit or community plan. If there isn't one, could you let me know what the cheapest option would be for about 12 users?",
+      "category": "Other",
+      "reference_summary": "Customer from a volunteer organisation is asking about nonprofit or community pricing and the cheapest plan for approximately 12 users.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "other_012",
+      "email_text": "My manager asked me to find out whether your service can be used by contractors who work with us temporarily. We would need them to access only one project, and we'd want their access removed automatically or easily when their contract ends. I'm not asking how to configure it yet, just whether this type of setup is supported.",
+      "category": "Other",
+      "reference_summary": "Customer wants to know whether temporary contractors can be given limited project access and have that access removed when their contracts end.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "other_013",
+      "email_text": "We're looking at moving our company over to your platform and I'm trying to work out whether it would actually fit how we're organised. We have a parent company with four subsidiaries, and each one would need its own workspace, although our central IT team would still need some oversight across all of them. Some of the people using the system would also be external consultants rather than employees. We haven't decided whether we'd need separate billing either. Could you let me know what setup you'd recommend and which plan supports this? We're not looking for a demo at this stage, just trying to understand whether the platform can handle the structure.",
+      "category": "Other",
+      "reference_summary": "Customer is evaluating whether the platform can support a multi-company organisational structure with separate workspaces, central IT oversight, external consultants, and potentially separate billing.",
+      "difficulty": "hard"
+    },
+    {
+      "id": "other_014",
+      "email_text": "I'm trying to understand whether your service would work for our particular setup before we sign anything. We have a parent company and four subsidiaries, and each subsidiary needs its own workspace, but our central IT team needs some level of oversight across all of them. We also have a mixture of full-time employees and external consultants. Could you explain whether your plans support this kind of structure, and if so, which plan we'd need? I don't need a sales pitch, just enough information to work out whether it's technically and commercially suitable.",
+      "category": "Other",
+      "reference_summary": "Customer wants to know whether the service supports multiple subsidiary workspaces, central IT oversight, and mixed employee/consultant access, and which plan would support that structure.",
+      "difficulty": "hard"
+    },
+    {
+      "id": "other_015",
+      "email_text": "I have a question that doesn't really fit any of the options in your help centre. We're planning to migrate from another platform and have about 15,000 records that we'd need to bring over. Some of the records have attachments and historical metadata. Before we start, I'd like to know whether you offer migration assistance or tools for importing this kind of data. If it's something your team handles as a professional service, that's fine too. I just need to understand what the process normally looks like.",
+      "category": "Other",
+      "reference_summary": "Customer is planning a migration of approximately 15,000 records with attachments and metadata and wants to know whether migration tools or professional migration assistance are available.",
+      "difficulty": "hard"
+    }
+  ]
+}
