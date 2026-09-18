@@ -19,4 +19,11 @@ def average_completion_tokens(results):
         total_tokens += i["completion_tokens"]
     avg_tokens = total_tokens/len(results)
     return round(avg_tokens, 2)
+
+def average_judge_score(results):
+    total_score = 0
+    for i in results:
+        total_score += i["judge_score"]
+    avg_score = total_score/len(results)
+    return round(avg_score, 2)
         

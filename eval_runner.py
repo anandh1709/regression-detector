@@ -2,7 +2,7 @@ import json
 from classifier import classify_email
 from classifier import load_prompt_config
 import asyncio
-from scoring import category_pass_rate, average_latency, average_completion_tokens
+from scoring import category_pass_rate, average_latency, average_completion_tokens, average_judge_score
 from judge import judge_summary
 
 def load_golden_dataset(path="data/golden_dataset/golden_dataset_v1.json"):
@@ -36,8 +36,10 @@ async def main():
     pass_rate = category_pass_rate(result)
     avg_latency = average_latency(result)
     avg_tokens = average_completion_tokens(result)
+    avg_score = average_judge_score(result)
     print(f"Average Latency: {avg_latency}s")
     print(f"Category Pass Rate: {pass_rate}%")
     print(f"Average Completion Tokens: {avg_tokens}")
+    print(f"Average Judge Score: {avg_score}")
 
 asyncio.run(main())
