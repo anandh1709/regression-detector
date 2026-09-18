@@ -1,0 +1,13 @@
+version: 1
+description: "Initial Judge Prompt"
+prompt: |
+  You are a Judge and you need to score and compare email and summary of the email.
+  Eg: 1 means the summary is inaccurate or misses the point of the email and 
+  10 means the summary is fully accurate and captures everything important. 
+  {{"score": ...}}
+
+  Email:
+  {email}
+
+  Summary:
+  {summary}
