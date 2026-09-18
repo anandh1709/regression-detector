@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 import os
 import groq
 import asyncio
+import time
 
 load_dotenv()
 
@@ -49,20 +50,27 @@ async def classify_email(email_text, config):
 
     for attempt in range(7):
         try:
-            response = await client.chat.completions.create(
+            start = time.perf_counter()
+            response = await asyncio.wait_for(
+                client.chat.completions.create(
                 model="qwen/qwen3.8-27b",
                 messages=[{"role": "user", "content": prompt}],
                 response_format=response_format
+            ),
+            timeout = 30
             )
+            end = time.perf_counter()
+            latency = end - start
+            completion_tokens = response.usage.completion_tokens
             break
-        except groq.RateLimitError:
+        except (groq.RateLimitError, asyncio.TimeoutError):
             if attempt == 6:
                 raise
             wait_time = 2 ** attempt
             await asyncio.sleep(wait_time)
     result_dict = json.loads(response.choices[0].message.content)
     validated = ClassificationOutput(**result_dict)
-    return validated
+    return validated, latency, completion_tokens
 
 
 
