@@ -4,6 +4,7 @@ from classifier import load_prompt_config
 import asyncio
 from scoring import category_pass_rate, average_latency, average_completion_tokens, average_judge_score
 from judge import judge_summary
+from datetime import datetime
 
 def load_golden_dataset(path="data/golden_dataset/golden_dataset_v1.json"):
     with open(path, encoding="utf-8") as f:
@@ -27,6 +28,18 @@ async def run_single_case(case, config, judge_config):
             "completion_tokens": completion_tokens,
             "judge_score": score_output.score
         }    
+    
+def save_run_history(run_data, path="data/run_history/run_history.json"):
+    try:
+        with open (path, encoding="utf-8") as f:
+            history = json.load(f)
+    except FileNotFoundError:
+        history = {"runs": []}
+
+    history["runs"].append(run_data)
+
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(history, f, indent=2)
 
 async def main():
     data = load_golden_dataset()
@@ -42,4 +55,18 @@ async def main():
     print(f"Average Completion Tokens: {avg_tokens}")
     print(f"Average Judge Score: {avg_score}")
 
+    run_data = {
+        "timestamp": datetime.now().isoformat(),
+        "prompt_version": config["version"],
+        "category_pass_rate": pass_rate,
+        "average_latency": avg_latency,
+        "average_tokens": avg_tokens,
+        "average_judge_score": avg_score
+    }
+    save_run_history(run_data)
 asyncio.run(main())
+
+
+
+
+

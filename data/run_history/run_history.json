@@ -1,0 +1,12 @@
+{
+  "runs": [
+    {
+      "timestamp": "2026-09-23T11:35:33.366225",
+      "prompt_version": 1,
+      "category_pass_rate": 86.67,
+      "average_latency": 1.89,
+      "average_tokens": 39.08,
+      "average_judge_score": 9.85
+    }
+  ]
+}
