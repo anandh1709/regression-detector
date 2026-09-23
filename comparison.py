@@ -18,7 +18,14 @@ def compare_runs(new_run, baseline_run):
             delta = new_value - old_value
         else:
             delta = (new_value - old_value) / old_value * 100
-        print(f"{metric}: delta = {round(delta, 2)}")
+
+        direction = METRIC_DIRECTIONS[metric]
+        if direction == "lower_is_worse":
+            severity = delta * -1
+        else:
+            severity = delta
+
+        print(f"{metric}: delta = {round(delta, 2)}, severity = {round(severity, 2)}")
 
 if __name__ == "__main__":
     with open("data/run_history/run_history.json", encoding="utf-8") as f:
