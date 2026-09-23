@@ -2,6 +2,8 @@ import json
 
 WARNING_THRESHOLD = 5
 CRITICAL_THRESHOLD = 10
+LATENCY_WARNING_THRESHOLD = 50
+LATENCY_CRITICAL_THRESHOLD = 100
 
 METRIC_DIRECTIONS = {
     "category_pass_rate": "lower_is_worse",
@@ -25,7 +27,19 @@ def compare_runs(new_run, baseline_run):
         else:
             severity = delta
 
-        print(f"{metric}: delta = {round(delta, 2)}, severity = {round(severity, 2)}")
+        if metric == "average_latency":
+            warn, crit = LATENCY_WARNING_THRESHOLD, LATENCY_CRITICAL_THRESHOLD
+        else:
+            warn, crit = WARNING_THRESHOLD, CRITICAL_THRESHOLD
+
+        if severity >= crit:
+            status = "critical"
+        elif severity >= warn:
+            status = "warning"
+        else:
+            status = "fine"
+            
+        print(f"{metric}: delta = {round(delta, 2)}, severity = {round(severity, 2)}, status = {status}")
 
 if __name__ == "__main__":
     with open("data/run_history/run_history.json", encoding="utf-8") as f:
