@@ -5,6 +5,7 @@ import asyncio
 from scoring import category_pass_rate, average_latency, average_completion_tokens, average_judge_score
 from judge import judge_summary
 from datetime import datetime
+from comparison import compare_runs
 
 def load_golden_dataset(path="data/golden_dataset/golden_dataset_v1.json"):
     with open(path, encoding="utf-8") as f:
@@ -63,6 +64,20 @@ async def main():
         "average_tokens": avg_tokens,
         "average_judge_score": avg_score
     }
+
+    try:
+        with open("data/run_history/run_history.json", encoding="utf-8") as f:
+            history = json.load(f)
+        existing_runs = history["runs"]
+    except FileNotFoundError:
+        existing_runs = []
+    
+    if len(existing_runs) > 0:
+        baseline = existing_runs[-1]
+        compare_runs(run_data, baseline)
+    else:
+        print("No baseline yet — this is the first run.")
+
     save_run_history(run_data)
 asyncio.run(main())
 

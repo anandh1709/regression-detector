@@ -48,7 +48,7 @@ async def classify_email(email_text, config):
         }
     }
 
-    for attempt in range(7):
+    for attempt in range(9):
         try:
             start = time.perf_counter()
             response = await asyncio.wait_for(
@@ -63,8 +63,8 @@ async def classify_email(email_text, config):
             latency = end - start
             completion_tokens = response.usage.completion_tokens
             break
-        except (groq.RateLimitError, asyncio.TimeoutError):
-            if attempt == 6:
+        except (groq.RateLimitError, asyncio.TimeoutError, groq.BadRequestError):
+            if attempt == 8:
                 raise
             wait_time = 2 ** attempt
             await asyncio.sleep(wait_time)
