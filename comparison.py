@@ -38,8 +38,29 @@ def compare_runs(new_run, baseline_run):
             status = "warning"
         else:
             status = "fine"
-            
+
         print(f"{metric}: delta = {round(delta, 2)}, severity = {round(severity, 2)}, status = {status}")
+
+
+def find_regressions(new_run, baseline_run):
+    if "case_results" not in baseline_run:
+        print("Baseline has no case-level data - skipping regression detection.")
+        return []
+    baseline_by_id = {case["id"]: case for case in baseline_run["case_results"]}
+
+    regressions = []
+    for new_case in new_run["case_results"]:
+        baseline_case = baseline_by_id[new_case["id"]]
+        baseline_passed = baseline_case["actual_category"] == baseline_case["expected_category"]
+        new_failed = new_case["actual_category"] != new_case["expected_category"]
+        if baseline_passed and new_failed:
+            regressions.append({
+                "id": new_case["id"],
+                "email_expected_category": new_case["expected_category"],
+                "baseline_actual_category": baseline_case["actual_category"],
+                "new_actual_category": new_case["actual_category"]
+            })
+    return regressions
 
 if __name__ == "__main__":
     with open("data/run_history/run_history.json", encoding="utf-8") as f:
@@ -48,3 +69,5 @@ if __name__ == "__main__":
     latest = runs[-1]
     previous = runs[-2]
     compare_runs(latest, previous)
+    regression = find_regressions(latest, previous)
+    print(regression)
