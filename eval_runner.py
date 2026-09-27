@@ -5,7 +5,7 @@ import asyncio
 from scoring import category_pass_rate, average_latency, average_completion_tokens, average_judge_score
 from judge import judge_summary
 from datetime import datetime
-from comparison import compare_runs
+from comparison import compare_runs, find_regressions
 
 def load_golden_dataset(path="data/golden_dataset/golden_dataset_v1.json"):
     with open(path, encoding="utf-8") as f:
@@ -62,7 +62,8 @@ async def main():
         "category_pass_rate": pass_rate,
         "average_latency": avg_latency,
         "average_tokens": avg_tokens,
-        "average_judge_score": avg_score
+        "average_judge_score": avg_score,
+        "case_results": result
     }
 
     try:
@@ -74,6 +75,13 @@ async def main():
     
     if len(existing_runs) > 0:
         baseline = existing_runs[-1]
+        regressions = find_regressions(run_data, baseline)
+        if regressions:
+            print(f"Found {len(regressions)} regressed case(s):")
+            for r in regressions:
+                print(r)
+        else:
+            print("No regressed case found.")
         compare_runs(run_data, baseline)
     else:
         print("No baseline yet — this is the first run.")
