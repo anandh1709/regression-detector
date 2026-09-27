@@ -13,6 +13,7 @@ METRIC_DIRECTIONS = {
 }
 
 def compare_runs(new_run, baseline_run):
+    results = []
     for metric in METRIC_DIRECTIONS:
         new_value = new_run[metric]
         old_value = baseline_run[metric]
@@ -41,6 +42,14 @@ def compare_runs(new_run, baseline_run):
 
         print(f"{metric}: delta = {round(delta, 2)}, severity = {round(severity, 2)}, status = {status}")
 
+        results.append({
+            "metric": metric,
+            "delta": round(delta, 2),
+            "severity": round(severity, 2),
+            "status": status
+        })
+
+    return results
 
 def find_regressions(new_run, baseline_run):
     if "case_results" not in baseline_run:
