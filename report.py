@@ -1,4 +1,4 @@
-def generate_html_report(run_data, baseline, comparison_results, regressions):
+def generate_html_report(run_data, baseline, comparison_results, regressions, drift_results):
     scorecard_rows = ""
     for r in comparison_results:
         scorecard_rows += f"""
@@ -9,7 +9,20 @@ def generate_html_report(run_data, baseline, comparison_results, regressions):
             <td class="{r['status']}">{r['status']}</td>
         </tr>
         """
-
+    if drift_results:
+        drift_rows = ""
+        for r in drift_results:
+            drift_rows += f"""
+            <tr>
+                <td>{r['metric']}</td>
+                <td>{r['delta']}</td>
+                <td>{r['severity']}</td>
+                <td class="{r['status']}">{r['status']}</td>
+            </tr>
+            """
+    else:
+        drift_rows = "<tr><td colspan='4'>Not enough history for drift detection yet</td></tr>"
+        
     if regressions:
         regression_rows = ""
         for reg in regressions:
@@ -49,6 +62,12 @@ def generate_html_report(run_data, baseline, comparison_results, regressions):
             {scorecard_rows}
         </table>
 
+        <h2>Drift (last 5 runs vs previous 5)</h2>
+        <table>
+            <tr><th>Metric</th><th>Delta</th><th>Severity</th><th>Status</th></tr>
+            {drift_rows}
+        </table>
+        
         <h2>Regressed Cases</h2>
         <table>
             <tr><th>ID</th><th>Expected</th><th>Baseline Got</th><th>New Run Got</th></tr>

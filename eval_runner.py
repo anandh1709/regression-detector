@@ -5,7 +5,7 @@ import asyncio
 from scoring import category_pass_rate, average_latency, average_completion_tokens, average_judge_score
 from judge import judge_summary
 from datetime import datetime
-from comparison import compare_runs, find_regressions
+from comparison import compare_runs, find_regressions, detect_drift
 from report import generate_html_report
 from alerts import send_slack_alert
 
@@ -85,12 +85,14 @@ async def main():
         else:
             print("No regressed case found.")
         comparison_results = compare_runs(run_data, baseline)
-        generate_html_report(run_data, baseline, comparison_results, regressions)
+        
+        print("Drift check (last 5 runs vs previous 5):")
+        drift_results = detect_drift(existing_runs + [run_data])
+        
+        generate_html_report(run_data, baseline, comparison_results, regressions, drift_results)
         send_slack_alert(run_data, comparison_results, regressions)
     else:
         print("No baseline yet — this is the first run.")
-
-        
 
     save_run_history(run_data)
 asyncio.run(main())
