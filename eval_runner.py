@@ -7,7 +7,7 @@ from judge import judge_summary
 from datetime import datetime
 from comparison import compare_runs, find_regressions, detect_drift
 from report import generate_html_report
-from alerts import send_slack_alert
+from alerts import send_slack_alerts
 
 def load_golden_dataset(path="data/golden_dataset/golden_dataset_v1.json"):
     with open(path, encoding="utf-8") as f:
@@ -90,7 +90,7 @@ async def main():
         drift_results = detect_drift(existing_runs + [run_data])
         
         generate_html_report(run_data, baseline, comparison_results, regressions, drift_results)
-        send_slack_alert(run_data, comparison_results, regressions, drift_results)
+        send_slack_alerts(run_data, comparison_results, regressions, drift_results)
     else:
         print("No baseline yet — this is the first run.")
 
