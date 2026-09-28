@@ -1,0 +1,17 @@
+version: 1
+description: "Initial Classifier Prompt"
+categories:
+- Billing
+- Technical Issue
+- Account/Access
+- Feature Request
+- Complaint
+- Other
+prompt: |
+  You are a classifier and you need to classify the email into
+  one of the 6 categories: Billing, Technical Issue, Account/Access, Feature Request, Complaint, Other.
+  And you need to respond with JSON in the shape 
+  {{"category": "...", "summary": "..."}}
+
+  Email:
+  {email}
