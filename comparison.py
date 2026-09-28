@@ -71,6 +71,24 @@ def find_regressions(new_run, baseline_run):
             })
     return regressions
 
+def average_runs(runs):
+    averaged = {}
+    for metric in METRIC_DIRECTIONS:
+        total = 0
+        for run in runs:
+            total += run[metric]
+        averaged[metric] = round(total / len(runs), 2)
+    return averaged
+    
+def detect_drift(runs, window=5):
+    if len(runs) < 2 * window:
+        print("Not enough history")
+        return []
+    
+    recent = average_runs(runs[-window:])
+    earlier = average_runs(runs[-2*window:-window])
+    return compare_runs(recent, earlier)
+    
 if __name__ == "__main__":
     with open("data/run_history/run_history.json", encoding="utf-8") as f:
         history = json.load(f)
@@ -80,3 +98,6 @@ if __name__ == "__main__":
     compare_runs(latest, previous)
     regression = find_regressions(latest, previous)
     print(regression)
+    print(average_runs(runs[-4:]))
+    print("Drift check (last 5 runs vs previous 5):")
+    drift = detect_drift(runs)
