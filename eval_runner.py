@@ -6,6 +6,8 @@ from scoring import category_pass_rate, average_latency, average_completion_toke
 from judge import judge_summary
 from datetime import datetime
 from comparison import compare_runs, find_regressions
+from report import generate_html_report
+from alerts import send_slack_alert
 
 def load_golden_dataset(path="data/golden_dataset/golden_dataset_v1.json"):
     with open(path, encoding="utf-8") as f:
@@ -82,9 +84,13 @@ async def main():
                 print(r)
         else:
             print("No regressed case found.")
-        compare_runs(run_data, baseline)
+        comparison_results = compare_runs(run_data, baseline)
+        generate_html_report(run_data, baseline, comparison_results, regressions)
+        send_slack_alert(run_data, comparison_results, regressions)
     else:
         print("No baseline yet — this is the first run.")
+
+        
 
     save_run_history(run_data)
 asyncio.run(main())
