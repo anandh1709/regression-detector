@@ -90,7 +90,7 @@ async def main():
         drift_results = detect_drift(existing_runs + [run_data])
         
         generate_html_report(run_data, baseline, comparison_results, regressions, drift_results)
-        send_slack_alert(run_data, comparison_results, regressions)
+        send_slack_alert(run_data, comparison_results, regressions, drift_results)
     else:
         print("No baseline yet — this is the first run.")
 
