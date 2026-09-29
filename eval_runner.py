@@ -8,6 +8,7 @@ from datetime import datetime
 from comparison import compare_runs, find_regressions, detect_drift
 from report import generate_html_report
 from alerts import send_slack_alerts
+import sys
 
 def load_golden_dataset(path="data/golden_dataset/golden_dataset_v1.json"):
     with open(path, encoding="utf-8") as f:
@@ -75,6 +76,8 @@ async def main():
     except FileNotFoundError:
         existing_runs = []
     
+    has_critical = False
+    
     if len(existing_runs) > 0:
         baseline = existing_runs[-1]
         regressions = find_regressions(run_data, baseline)
@@ -91,10 +94,17 @@ async def main():
         
         generate_html_report(run_data, baseline, comparison_results, regressions, drift_results)
         send_slack_alerts(run_data, comparison_results, regressions, drift_results)
+        
+        for r in comparison_results:
+            if r["status"] == "critical":
+                has_critical = True
     else:
         print("No baseline yet — this is the first run.")
 
     save_run_history(run_data)
+    
+    if has_critical:
+        sys.exit(1)
 asyncio.run(main())
 
 
