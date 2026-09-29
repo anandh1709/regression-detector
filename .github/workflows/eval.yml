@@ -8,6 +8,8 @@ on:
 jobs:
   run-eval:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -25,4 +27,13 @@ jobs:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: python eval_runner.py
-      
+
+      - name: Commit updated run history
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/run_history/run_history.json
+          git commit -m "Update run history [skip ci]" || echo "No changes to commit"
+          git push
+
+    
