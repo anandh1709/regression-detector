@@ -7,15 +7,11 @@ classifier as the system under test.
 ## Why this exists
 
 LLM-powered features don't fail like normal software. A prompt change or
-model swap can silently degrade output quality — wrong classifications,
-vaguer summaries, slower responses — with no crash and no error. This system
+model swap can silently degrade output quality (wrong classifications,
+vaguer summaries, slower responses) with no crash and no error. This system
 catches that class of failure automatically, by running every prompt-touching
 PR against a hand-labeled golden dataset and flagging statistically
 significant drops against the last known-good baseline.
-
-"Regression" here is used in the software-testing sense (something that used
-to work, stopped working) — not the ML sense. This is a detector, not a
-fixer: it flags problems for a human to act on.
 
 ## Architecture
 
@@ -82,7 +78,7 @@ docker run --rm -e GROQ_API_KEY=your_actual_key -e SLACK_WEBHOOK_URL=your_actual
 
 The volume mount for `data/` keeps `run_history.json` and the golden dataset
 persisted on the host, so results survive between container runs instead of
-disappearing when the container exits — the container itself is disposable,
+disappearing when the container exits. The container itself is disposable,
 the run history isn't.
 
 ## Scoring dimensions
@@ -110,11 +106,11 @@ significantly higher natural variance than the other three metrics.
 
 ## Known limitations
 
-- Per-case regression detection is not filtered for noise (by design — it
-  surfaces detail that aggregate thresholds would hide). Some flagged cases
+- Per-case regression detection is not filtered for noise, by design. It
+  surfaces detail that aggregate thresholds would hide. Some flagged cases
   may be normal LLM non-determinism rather than true regressions.
-- Drift detection uses the same thresholds as single-run comparisons;
+- Drift detection uses the same thresholds as single-run comparisons.
   5-run averages are less noisy than single runs, so tighter drift-specific
   thresholds would be a reasonable future refinement.
-- No trend chart yet (deferred — insufficient run history for a first-version
-  chart to be meaningful).
+- No trend chart yet, deferred due to insufficient run history for a
+  first-version chart to be meaningful.
