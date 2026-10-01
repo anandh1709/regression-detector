@@ -77,11 +77,7 @@ docker build -t regression-detector .
 Run an eval, passing secrets in at runtime (never baked into the image):
 
 ```bash
-docker run --rm \
-  -e GROQ_API_KEY=your_key_here \
-  -e SLACK_WEBHOOK_URL=your_webhook_url_here \
-  -v "$(pwd)/data:/app/data" \
-  regression-detector
+docker run --rm -e GROQ_API_KEY=your_actual_key -e SLACK_WEBHOOK_URL=your_actual_webhook_url -v "${PWD}:/app" regression-detector
 ```
 
 The volume mount for `data/` keeps `run_history.json` and the golden dataset
