@@ -12,16 +12,19 @@ METRIC_DIRECTIONS = {
     "average_judge_score": "lower_is_worse"
 }
 
+# Compare each metric to baseline and assign fine/warning/critical
 def compare_runs(new_run, baseline_run):
     results = []
     for metric in METRIC_DIRECTIONS:
         new_value = new_run[metric]
         old_value = baseline_run[metric]
+        # Pass rate is already a percentage; others use percent change
         if metric == "category_pass_rate":
             delta = new_value - old_value
         else:
             delta = (new_value - old_value) / old_value * 100
 
+        # Severity: positive means the metric got worse
         direction = METRIC_DIRECTIONS[metric]
         if direction == "lower_is_worse":
             severity = delta * -1
@@ -51,6 +54,7 @@ def compare_runs(new_run, baseline_run):
 
     return results
 
+# Find cases that passed in the baseline but fail now
 def find_regressions(new_run, baseline_run):
     if "case_results" not in baseline_run:
         print("Baseline has no case-level data - skipping regression detection.")
@@ -71,6 +75,7 @@ def find_regressions(new_run, baseline_run):
             })
     return regressions
 
+# Average each tracked metric across runs
 def average_runs(runs):
     averaged = {}
     for metric in METRIC_DIRECTIONS:
@@ -80,6 +85,7 @@ def average_runs(runs):
         averaged[metric] = round(total / len(runs), 2)
     return averaged
     
+# Compare the latest window of runs against the window before it
 def detect_drift(runs, window=5):
     if len(runs) < 2 * window:
         print("Not enough history")

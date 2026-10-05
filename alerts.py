@@ -9,6 +9,7 @@ webhook_url = os.getenv("SLACK_WEBHOOK_URL")
 if not webhook_url:
     raise ValueError("SLACK_WEBHOOK_URL not found — check your .env file")
 
+# Keep only metrics that are warning or critical
 def get_flagged(results):
     flagged = []
     for r in results:
@@ -16,10 +17,12 @@ def get_flagged(results):
             flagged.append(r)
     return flagged
 
+# Send a plain-text message to the Slack webhook
 def post_to_slack(message):
     response = requests.post(webhook_url, json={"text": message}, timeout=10)
     response.raise_for_status()
 
+# Alert on baseline regressions, then separately on slow drift
 def send_slack_alerts(run_data, comparison_results, regressions, drift_results):
     flagged = get_flagged(comparison_results)
     if flagged:
@@ -50,6 +53,7 @@ def send_slack_alerts(run_data, comparison_results, regressions, drift_results):
         post_to_slack(message)
 
 if __name__ == "__main__":
+    # Manual test with fake data
     fake_run = {"prompt_version": 1}
     fake_comparison = [
         {"metric": "category_pass_rate", "delta": 1.0, "severity": -1.0, "status": "fine"},

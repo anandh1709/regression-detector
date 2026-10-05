@@ -1,3 +1,4 @@
+# Write report.html with scorecard, drift, and regressed-case tables
 def generate_html_report(run_data, baseline, comparison_results, regressions, drift_results):
     scorecard_rows = ""
     for r in comparison_results:

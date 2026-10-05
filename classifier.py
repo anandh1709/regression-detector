@@ -17,15 +17,18 @@ if not api_key:
 
 client = AsyncGroq(api_key=api_key)
 
+# Load a prompt template and its metadata from YAML
 def load_prompt_config(path="prompts/classifier.yaml"):
     with open(path, encoding="utf-8") as f:
         return yaml.safe_load(f)
 
+# Fill the email into the prompt template
 def build_prompt(email_text, config):
     prompt_template = config["prompt"]
     result = prompt_template.format(email=email_text)
     return result
 
+# Classify an email; returns (output, latency, completion_tokens)
 async def classify_email(email_text, config):
     prompt = build_prompt(email_text, config)
     response_format = {
@@ -48,6 +51,7 @@ async def classify_email(email_text, config):
         }
     }
 
+    # Retry with exponential backoff on rate limits, timeouts, bad requests
     for attempt in range(9):
         try:
             start = time.perf_counter()

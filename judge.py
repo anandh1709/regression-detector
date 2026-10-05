@@ -4,11 +4,13 @@ import groq
 import json
 from models import JudgeOutput
 
+# Fill the email and summary into the judge prompt
 def build_judge_prompt(email_text, summary_text, config):
     prompt_template = config["prompt"]
     result = prompt_template.format(email=email_text, summary=summary_text)
     return result
 
+# Score a summary (1-10) using an LLM judge
 async def judge_summary(email_text, summary_text, config):
     prompt = build_judge_prompt(email_text, summary_text, config)
     response_format = {
@@ -27,6 +29,7 @@ async def judge_summary(email_text, summary_text, config):
         }
     }
 
+    # Retry with exponential backoff
     for attempt in range(9):
         try:
             response = await asyncio.wait_for(

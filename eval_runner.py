@@ -10,13 +10,16 @@ from report import generate_html_report
 from alerts import send_slack_alerts
 import sys
 
+# Load the golden test cases
 def load_golden_dataset(path="data/golden_dataset/golden_dataset_v1.json"):
     with open(path, encoding="utf-8") as f:
         data = json.load(f)
     return data["cases"]
 
+# Limit concurrent cases to avoid rate limits
 semaphore = asyncio.Semaphore(2)
 
+# Classify one case and judge its summary
 async def run_single_case(case, config, judge_config):
     async with semaphore:
         result, latency, completion_tokens = await classify_email(case["email_text"], config)
@@ -33,6 +36,7 @@ async def run_single_case(case, config, judge_config):
             "judge_score": score_output.score
         }    
     
+# Append this run to the history file
 def save_run_history(run_data, path="data/run_history/run_history.json"):
     try:
         with open (path, encoding="utf-8") as f:
@@ -77,7 +81,8 @@ async def main():
         existing_runs = []
     
     has_critical = False
-    
+
+    # Compare against the previous run, if any
     if len(existing_runs) > 0:
         baseline = existing_runs[-1]
         regressions = find_regressions(run_data, baseline)
@@ -103,6 +108,7 @@ async def main():
 
     save_run_history(run_data)
     
+    # Non-zero exit so CI fails on critical regressions
     if has_critical:
         sys.exit(1)
 asyncio.run(main())

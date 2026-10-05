@@ -1,3 +1,4 @@
+# Percent of cases where the predicted category matches expected
 def category_pass_rate(results):
     correct = 0
     for i in results:
@@ -6,6 +7,7 @@ def category_pass_rate(results):
     pass_rate = (correct/len(results)) * 100
     return round(pass_rate, 2)
 
+# Mean latency in seconds
 def average_latency(results):
     total_latency = 0
     for i in results:
@@ -13,6 +15,7 @@ def average_latency(results):
     avg_latency = total_latency/len(results)
     return round(avg_latency, 2) 
 
+# Mean completion tokens per case
 def average_completion_tokens(results):
     total_tokens = 0
     for i in results:
@@ -20,6 +23,7 @@ def average_completion_tokens(results):
     avg_tokens = total_tokens/len(results)
     return round(avg_tokens, 2)
 
+# Mean judge score per case
 def average_judge_score(results):
     total_score = 0
     for i in results:
